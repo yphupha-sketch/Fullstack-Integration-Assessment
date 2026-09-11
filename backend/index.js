@@ -53,10 +53,10 @@ expresscontainer.put("/products/:id" , (req, res) =>  {
             .status(400)
             .json({ error: "name price and are required!" });
     }
-    products[0].name = name;
-    products[0].price = price;
-    products[0].quantity = quantity;
-    return res.status(200).json(products);
+    products[-1].name = name;
+    products[-1].price = price;
+    products[-1].quantity = quantity;
+    return res.status(200).json(products[-1]);
   }else{
     res.status(404).json({message:"products not found"})
   }
