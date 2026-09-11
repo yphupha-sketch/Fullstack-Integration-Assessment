@@ -47,21 +47,19 @@ expresscontainer.put("/products/:id" , (req, res) =>  {
   const foundIndex = products.findIndex(p=> p.id === req.params.id)
   if(foundIndex !== -1)
   {
-    return res.status(404).json({ error: "products not found!" });
-  }
-    const{name,price,quantity} = req.body
-    if (!name|| !price || !quantity) 
-        {
+  const { name, price, quantity } = req.body;
+    if (!name || !price || !quantity) {
         return res
             .status(400)
-            .json({ error: "name,price and quantity are required!" });
-             }else{
-               user.username = username;
-    foundIndex.email = email;
-    foundIndex.password = password;
-    return res.status(200).json(foundIndex);
-             }
-
+            .json({ error: "name price and are required!" });
+    }
+    expresscontainer.username = name;
+    expresscontainer.email = price;
+    expresscontainer.password = quantity;
+    return res.status(200).json(user);
+  }else{
+    res.status(404).json({message:"products not found"})
+  }
 })
 
 
