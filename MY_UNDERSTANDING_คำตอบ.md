@@ -33,43 +33,46 @@ rate ตัวเองอย่างตรงไปตรงมาโดยใ
 
 *คำตอบของคุณ:*
 
----
+ทำเเต่ละหน้าที่ต่างกัน get อ่านข้อมมูล post สร้างข้อมูล put /patch เเก้ข้อมูลบางส่วนฝทั้งหมด delete ลบข้อมูล
 
 **2. `express.json()` คืออะไร และจะเกิดอะไรขึ้นถ้าคุณไม่ใส่มัน?**
 
 *คำตอบของคุณ:*
 
----
+เอาexpreesมาแปลงเป็นjson?
 
 **3. `req.body`, `req.params`, และ `req.query` ต่างกันอย่างไร? ยกตัวอย่างจริงจาก API ของคุณสำหรับแต่ละตัว**
 
 *คำตอบของคุณ:*
 
----
+req body = request body
+req params =reqest params 
+req.quesry =request quesry 
+
 
 **4. HTTP status codes คืออะไร? ระบุรายการ status code ทุกตัวที่คุณใช้ใน API และอธิบายว่าทำไมถึงเลือกใช้ในแต่ละสถานการณ์**
 
 *คำตอบของคุณ:*
 
----
+---จำไม่ได้มากเเต่ที่เข้าใจคือ สถานะ ของ http server 500 คือ serverระเบิด
 
 **5. middleware คืออะไร? อธิบายด้วยคำพูดของคุณเองว่ามันทำอะไร พร้อมยกตัวอย่าง 1 อย่างจากโค้ดของคุณ**
 
 *คำตอบของคุณ:*
 
----
+---middle ware 8nv ตัวเชื่อมระหว่าง softwareสองตัว
 
 **6. ทำไม order ของ middleware ใน Express ถึงสำคัญ? จะเกิดอะไรขึ้นถ้า order ผิด?**
 
 *คำตอบของคุณ:*
 
----
+เกิด error 
 
 **7. อธิบายทีละขั้นตอนว่าเกิดอะไรขึ้นบน server เมื่อมี POST request ถูกส่งไปที่ `/products`**
 
 *คำตอบของคุณ:*
 
----
+---สร้าง product
 
 **8. CRUD คืออะไร? จับคู่แต่ละ operation กับ HTTP method และ route ที่คุณใช้ใน API**
 
@@ -81,7 +84,33 @@ rate ตัวเองอย่างตรงไปตรงมาโดยใ
 
 *คำตอบของคุณ:*
 
----
+----ขึ้นอยู่กับว่าเขียนโค้ดไว่ว้าอะไร เช่น outer.put("/:id", async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res
+        .status(400)
+        .json({ error: "username, email and password are required!" });
+    }
+
+    const updateUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { username, email, password },
+      { new: true, runValidators: true },
+    ).select("-password");
+
+    if (!updateUser) {
+      return res.status(404).json({ error: "User not found!" }); <--------------------
+    }
+
+    return res.status(200).json(updateUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
+จะขึ้นว่า user  not found  (โค้ดก็อบมาจากงานเก่าที่gitcloneมาอีกที1)
 
 ## Frontend & Integration
 
@@ -135,7 +164,7 @@ rate ตัวเองอย่างตรงไปตรงมาโดยใ
 
 *คำตอบของคุณ:*
 
----
+--- read @ASSESSMENT-BRIEF.md  สอนทำำ step by step โดยไม่เฉลยทีเดียว
 
 **18. อธิบายสิ่งที่ AI tool สร้างให้ 1 อย่างที่คุณเปลี่ยน แก้ไข หรือปฏิเสธ — พร้อมเหตุผลว่าทำไม**
 
